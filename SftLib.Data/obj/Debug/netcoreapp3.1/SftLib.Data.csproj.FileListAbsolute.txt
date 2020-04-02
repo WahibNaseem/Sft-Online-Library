@@ -8,10 +8,10 @@ C:\code workcamp\Tutorial\Sft\SftLib.Data\bin\Debug\netcoreapp3.1\SftLib.Data.ru
 C:\code workcamp\Tutorial\Sft\SftLib.Data\bin\Debug\netcoreapp3.1\SftLib.Data.runtimeconfig.dev.json
 C:\code workcamp\Tutorial\Sft\SftLib.Data\bin\Debug\netcoreapp3.1\SftLib.Data.dll
 C:\code workcamp\Tutorial\Sft\SftLib.Data\bin\Debug\netcoreapp3.1\SftLib.Data.pdb
-C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.csprojAssemblyReference.cache
-C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.csproj.CoreCompileInputs.cache
 C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.AssemblyInfoInputs.cache
 C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.AssemblyInfo.cs
 C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.dll
 C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.pdb
 C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.genruntimeconfig.cache
+C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.csproj.CoreCompileInputs.cache
+C:\code workcamp\Tutorial\Sft\SftLib.Data\obj\Debug\netcoreapp3.1\SftLib.Data.csprojAssemblyReference.cache

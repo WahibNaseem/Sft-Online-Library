@@ -10,7 +10,7 @@ namespace SftLib.Data.Persistance.Contexts
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

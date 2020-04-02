@@ -71,9 +71,6 @@ C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\runtimes\wi
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.csprojAssemblyReference.cache
-C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.csproj.CoreCompileInputs.cache
-C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.MvcApplicationPartsAssemblyInfo.cache
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.AssemblyInfoInputs.cache
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.AssemblyInfo.cs
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.RazorTargetAssemblyInfo.cache
@@ -83,3 +80,9 @@ C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\staticwebas
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.dll
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.pdb
 C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.genruntimeconfig.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\SftLib.Data.dll
+C:\code workcamp\Tutorial\Sft\SftLibrary.API\bin\Debug\netcoreapp3.1\SftLib.Data.pdb
+C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.csprojAssemblyReference.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.csproj.CoreCompileInputs.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.API\obj\Debug\netcoreapp3.1\SftLibrary.API.MvcApplicationPartsAssemblyInfo.cache
