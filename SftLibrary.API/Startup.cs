@@ -11,7 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SftLib.Data.Domain.Repositories;
 using SftLib.Data.Persistance.Contexts;
+using SftLib.Data.Persistance.Repositories;
+using SftLibrary.Data.Domain.Services;
+using SftLibrary.Service.Services;
 
 namespace SftLibrary.API
 {
@@ -29,6 +33,9 @@ namespace SftLibrary.API
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SftLibraryApiConnection")));
             services.AddControllers();
+
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookService, BookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

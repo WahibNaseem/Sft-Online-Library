@@ -1,0 +1,12 @@
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\bin\Debug\netcoreapp3.1\SftLibrary.Service.deps.json
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\bin\Debug\netcoreapp3.1\SftLibrary.Service.dll
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\bin\Debug\netcoreapp3.1\SftLibrary.Service.pdb
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\bin\Debug\netcoreapp3.1\SftLibrary.Data.dll
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\bin\Debug\netcoreapp3.1\SftLibrary.Data.pdb
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.csprojAssemblyReference.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.csproj.CoreCompileInputs.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.AssemblyInfoInputs.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.AssemblyInfo.cs
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.csproj.CopyComplete
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.dll
+C:\code workcamp\Tutorial\Sft\SftLibrary.Service\obj\Debug\netcoreapp3.1\SftLibrary.Service.pdb
