@@ -283,8 +283,7 @@ namespace SftLibrary.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Books_StatusId",
                 table: "Books",
-                column: "StatusId",
-                unique: true);
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

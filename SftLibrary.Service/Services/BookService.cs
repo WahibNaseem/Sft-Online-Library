@@ -1,5 +1,6 @@
 ﻿using SftLib.Data.Domain.Models;
 using SftLib.Data.Domain.Repositories;
+using SftLibrary.Data.Domain.Repositories;
 using SftLibrary.Data.Domain.Services;
 using SftLibrary.Data.Domain.Services.Communication;
 using System;
@@ -12,38 +13,85 @@ namespace SftLibrary.Service.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BookService(IBookRepository bookRepository)
+        public BookService(IBookRepository bookRepository, IUnitOfWork unitOfWork)
         {
             _bookRepository = bookRepository;
+            _unitOfWork = unitOfWork;
         }
-        public Task<BookResponse> DeleteAsync(int id)
+        public async Task<BookResponse> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var existingBook = await _bookRepository.FindByIdAsync(id);
+
+            if (existingBook == null)
+                return new BookResponse("Book Not Found!");
+
+            try
+            {
+                _bookRepository.Remove(existingBook);
+                await _unitOfWork.CompleteAsync();
+
+                return new BookResponse(existingBook);
+
+            }
+            catch (Exception ex)
+            {
+                return new BookResponse($"An error occurred when deleting the book:{ex.Message}");
+            }
+        }
+
+        public async Task<BookResponse> FindByIdAsync(int id)
+        {
+            var existingBook = await _bookRepository.FindByIdAsync(id);
+
+            if (existingBook == null)
+                return new BookResponse("Book Not Found!");
+
+            return new BookResponse(existingBook);
         }
 
         public async Task<IEnumerable<Book>> ListAsync()
         {
-            return await _bookRepository.ListAsync();
+            var list = await _bookRepository.ListAsync();
+            return list;
         }
 
         public async Task<BookResponse> SaveAsync(Book book)
         {
             try
             {
-               await _bookRepository.AddAsync(book);
+                await _bookRepository.AddAsync(book);
+                await _unitOfWork.CompleteAsync();
 
-                return new BookResponse();
+                return new BookResponse(book);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new BookResponse();
+                return new BookResponse($"An error occurred when saving the book:{ex.Message}");
             }
         }
 
-        public  Task<BookResponse> UpdateAsync(int id, Book book)
+        public async Task<BookResponse> UpdateAsync(int id, Book book)
         {
-            throw new NotImplementedException();
+            var existingBook = await _bookRepository.FindByIdAsync(id);
+
+            if (existingBook == null)
+                return new BookResponse("Book Not Found!");
+
+            //Update existingBook entitycode here
+
+            try
+            {
+                _bookRepository.Update(existingBook);
+                await _unitOfWork.CompleteAsync();
+
+                return new BookResponse(existingBook);
+            }
+            catch (Exception ex)
+            {
+                return new BookResponse($"An error occurred when updating the book:{ex.Message}");
+            }
         }
     }
 }

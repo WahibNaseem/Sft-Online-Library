@@ -10,8 +10,7 @@ namespace SftLib.Data.Domain.Models
         public string Title { get; set; }
         public string Author { get; set; }
         public int Year { get; set; }
-        
-        
+
         public int StatusId { get; set; }
         public virtual Status Status { get; set; }
     }

@@ -10,8 +10,8 @@ using SftLib.Data.Persistance.Contexts;
 namespace SftLibrary.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200403024825_Initial Database")]
-    partial class InitialDatabase
+    [Migration("20200404033427_Initiate Database")]
+    partial class InitiateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,8 +132,7 @@ namespace SftLibrary.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StatusId")
-                        .IsUnique();
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Books");
 
@@ -359,8 +358,8 @@ namespace SftLibrary.Data.Migrations
             modelBuilder.Entity("SftLib.Data.Domain.Models.Book", b =>
                 {
                     b.HasOne("SftLib.Data.Domain.Models.Status", "Status")
-                        .WithOne("Book")
-                        .HasForeignKey("SftLib.Data.Domain.Models.Book", "StatusId")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

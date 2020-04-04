@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace SftLibrary.Data.Domain.Services
 {
-   public interface IBookService
+    public interface IBookService
     {
         Task<IEnumerable<Book>> ListAsync();
+        Task<BookResponse> FindByIdAsync(int id);
         Task<BookResponse> SaveAsync(Book book);
         Task<BookResponse> UpdateAsync(int id, Book book);
         Task<BookResponse> DeleteAsync(int id);

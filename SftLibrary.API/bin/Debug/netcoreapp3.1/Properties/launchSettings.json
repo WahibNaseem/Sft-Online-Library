@@ -19,7 +19,7 @@
     },
     "SftLibrary.API": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {

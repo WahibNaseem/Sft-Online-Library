@@ -1,0 +1,9 @@
+.vscode
+.vscode
+
+SftLibrary.API/bin
+SftLibrary.API/obj
+SftLibrary.Data/bin
+SftLibrary.Data/obj
+SftLibrary.Service/bin
+SftLibrary.Service/obj

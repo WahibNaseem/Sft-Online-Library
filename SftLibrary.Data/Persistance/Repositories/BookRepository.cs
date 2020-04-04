@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace SftLib.Data.Persistance.Repositories
 {
-    public class BookRepository :BaseRepository, IBookRepository
+    public class BookRepository : BaseRepository, IBookRepository
     {
-        public BookRepository(AppDbContext appDbcontext): base(appDbcontext) { }
-       
+        public BookRepository(AppDbContext appDbcontext) : base(appDbcontext) { }
+
         public async Task AddAsync(Book book)
         {
             await _context.Books.AddAsync(book);
@@ -25,7 +25,7 @@ namespace SftLib.Data.Persistance.Repositories
 
         public async Task<IEnumerable<Book>> ListAsync()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Include(x => x.Status).ToListAsync();            
         }
 
         public void Remove(Book book)
