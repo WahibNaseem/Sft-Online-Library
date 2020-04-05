@@ -9,12 +9,13 @@ namespace SftLibrary.API.Mapping
     {
         public ModelToResourceProfile()
         {
-            CreateMap<UserForRegisterResource, User>();
-            CreateMap<UserForLoginResource, User>();
+            CreateMap<UserForRegisterResource, User>().ReverseMap();
+            CreateMap<UserForLoginResource, User>().ReverseMap();
+            CreateMap<UserForListResource, User>().ReverseMap();
 
-            CreateMap<Book, BookResource>();
-            CreateMap<Status, StatusResource>();
-            CreateMap<SaveBookResource, Book>();
+            CreateMap<Book, BookResource>().ReverseMap();
+            CreateMap<Status, StatusResource>().ReverseMap();
+            CreateMap<SaveBookResource, Book>().ReverseMap();
         }
     }
 }

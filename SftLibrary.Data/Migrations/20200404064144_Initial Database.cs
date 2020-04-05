@@ -44,7 +44,8 @@ namespace SftLibrary.Data.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true)
+                    Address = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -132,8 +133,8 @@ namespace SftLibrary.Data.Migrations
                 {
                     UserId = table.Column<int>(nullable: false),
                     RoleId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<int>(nullable: true),
-                    RoleId1 = table.Column<int>(nullable: true)
+                    RoleId1 = table.Column<int>(nullable: true),
+                    UserId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

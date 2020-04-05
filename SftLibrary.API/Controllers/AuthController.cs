@@ -42,6 +42,8 @@ namespace SftLibrary.API.Controllers
 
             if (result.Succeeded)
             {
+                //Created the role
+                _usermanager.AddToRoleAsync(userToCreate,"Member").Wait();
                 var userToReturn = _mapper.Map<UserForRegisterResource>(userToCreate);
                 return Ok(userToReturn);
             }
@@ -52,7 +54,7 @@ namespace SftLibrary.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginResource userForLogin)
         {
-            var user = await _usermanager.FindByNameAsync(userForLogin.UserName);
+            var user = await _usermanager.FindByNameAsync(userForLogin.UserName.ToUpper());
 
             if (user == null)
                 return BadRequest("Faild to find Username");
@@ -61,7 +63,7 @@ namespace SftLibrary.API.Controllers
 
             if (result.Succeeded)
             {
-                var userToReturn = _mapper.Map<UserForLoginResource>(user);
+                var userToReturn = _mapper.Map<UserForListResource>(user);
 
                 return Ok(new
                 {

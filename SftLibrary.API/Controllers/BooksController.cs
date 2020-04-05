@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SftLibrary.API.Controllers
 {
+    [Authorize(Policy = "")]
     [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]

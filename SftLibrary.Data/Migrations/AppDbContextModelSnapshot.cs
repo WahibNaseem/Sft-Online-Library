@@ -214,6 +214,9 @@ namespace SftLibrary.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -370,8 +373,8 @@ namespace SftLibrary.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SftLibrary.Data.Domain.Models.Role", "Role")
-                        .WithMany("Users")
+                    b.HasOne("SftLibrary.Data.Domain.Models.Role", null)
+                        .WithMany("UserRoles")
                         .HasForeignKey("RoleId1");
 
                     b.HasOne("SftLib.Data.Domain.Models.User", null)
@@ -380,7 +383,7 @@ namespace SftLibrary.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SftLib.Data.Domain.Models.User", "User")
+                    b.HasOne("SftLib.Data.Domain.Models.User", null)
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId1");
                 });
