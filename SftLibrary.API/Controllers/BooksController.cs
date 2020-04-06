@@ -6,12 +6,12 @@ using SftLib.Data.Domain.Models;
 using SftLibrary.API.Extensions;
 using SftLibrary.API.Resources;
 using SftLibrary.Data.Domain.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SftLibrary.API.Controllers
 {
-    [Authorize(Policy = "")]
     [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
@@ -27,9 +27,10 @@ namespace SftLibrary.API.Controllers
         }
 
         [HttpGet("books")]
-        public async Task<IActionResult> GetBooks()
+        public async Task<IActionResult> GetBooks([FromQuery]string search )
         {
-            var books = await _bookService.ListAsync();
+            
+            var books = await _bookService.ListAsync(search);
             var resources = _mapper.Map<IEnumerable<BookResource>>(books);
 
             return Ok(resources);
@@ -49,8 +50,8 @@ namespace SftLibrary.API.Controllers
         }
 
 
-        [HttpPost("{id}")]
-        public async Task<IActionResult> PostAsync(int id, [FromBody]SaveBookResource saveBookResource)
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody]SaveBookResource saveBookResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());

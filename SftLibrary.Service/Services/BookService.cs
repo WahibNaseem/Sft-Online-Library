@@ -5,6 +5,7 @@ using SftLibrary.Data.Domain.Services;
 using SftLibrary.Data.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,10 +52,20 @@ namespace SftLibrary.Service.Services
             return new BookResponse(existingBook);
         }
 
-        public async Task<IEnumerable<Book>> ListAsync()
+        public async Task<IEnumerable<Book>> ListAsync(string search)
         {
-            var list = await _bookRepository.ListAsync();
-            return list;
+            if (string.IsNullOrEmpty(search))
+            {
+                var list = await _bookRepository.ListAsync();
+                return list;
+            }
+            else
+            {
+                var books = await _bookRepository.ListAsync();
+                var list = books.Where(x => x.Title.ToLower().Contains(search.ToLower()));
+
+                return list;
+            }
         }
 
         public async Task<BookResponse> SaveAsync(Book book)

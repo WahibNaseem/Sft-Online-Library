@@ -1,26 +1,35 @@
 <nav class="navbar navbar-expand-md navbar-dark  bg-dark">
+  <div class="container">
   <a class="navbar-brand" href="#">SLT Library</a>
 
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Catalog</a>
-    </li>
-    <li class="nav-item"> 
-      <a class="nav-link" href="#">Patrons</a>
-    </li>
+    <li class="nav-item" routerLinkActive="active" >
+      <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+    </li> 
+   
+    <li class="nav-item" routerLinkActive="active" *ngIf="loggedIn()">
+      <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+    </li>    
   </ul>
-  <ul class="navbar-nav">
-    <li class="nav-item">
+  
+  <ul  *ngIf="!loggedIn()" class="navbar-nav">
+    <li class="nav-item" routerLinkActive="active">
       <a class="nav-link" [routerLink] = "['/login']">Login</a>
     </li>
     <li class="nav-item">
       <!-- <a class="nav-link" [routerLink] = "['/register']">Register</a>  -->
     </li>
   </ul>
-
-
+   
+  <div *ngIf="loggedIn();" class="dropdown" dropdown>
+    <a class="dropdown-toggle text-light" dropdownToggle>
+      Hi User
+    </a>
+    <div class="dropdown-menu mt-3" *dropdownMenu>
+      <a class="dropdown-item" [routerLink]="['/patron']"><i class="fa fa-user mr-2"></i>Profile</a>
+      <a class="dropdown-item" (click)="logout();"><i class="fa fa-sign-out mr-2"></i>Logout</a>
+    </div>
+  </div> 
+</div>
 
 </nav>

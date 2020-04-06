@@ -1,11 +1,15 @@
+using System.Net;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +19,7 @@ using SftLib.Data.Domain.Models;
 using SftLib.Data.Domain.Repositories;
 using SftLib.Data.Persistance.Contexts;
 using SftLib.Data.Persistance.Repositories;
+using SftLibrary.API.Extensions;
 using SftLibrary.Data.Domain.Models;
 using SftLibrary.Data.Domain.Repositories;
 using SftLibrary.Data.Domain.Services;
@@ -37,21 +42,21 @@ namespace SftLibrary.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region //Code to Authorize the User through policy rather the action method filter
-            services.AddAuthorization(options =>
-            {
+            services.AddAuthorization(options => {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("RequireMemberRole", policy => policy.RequireRole("Memeber"));
                 options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Admin,Moderator"));
+
             });
 
             services.AddMvc(options =>
             {
-                //Configure to have authorize filter globally
+                //Added this configuration to authorize user globally
                 var policy = new AuthorizationPolicyBuilder()
-                                 .RequireAuthenticatedUser().Build();
+                            .RequireAuthenticatedUser()
+                            .Build();
 
                 options.Filters.Add(new AuthorizeFilter(policy));
-
             });
 
             #endregion
@@ -100,6 +105,24 @@ namespace SftLibrary.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if(error != null)
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+
+                });
             }
 
             //app.UseHttpsRedirection();

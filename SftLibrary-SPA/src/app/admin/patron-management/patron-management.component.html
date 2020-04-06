@@ -1,0 +1,16 @@
+<div class="row">
+  <table class="table">
+    <tr>
+      <th style="width: 10%">ID</th>
+      <th style="width: 30%">UserName</th>
+      <!-- <th style="width: 10%">Roles</th> -->
+      <th style="width: 30%">Action</th>
+    </tr>
+    <tr *ngFor="let item of patrons">
+      <td>{{item.id}}</td>
+      <td>{{item.userName}}</td>
+      <td>{{item.roles}}</td>
+      <td><button class="btn btn-primary" (click)="editRolesModal();">Edit Roles</button></td>
+    </tr>
+  </table>
+</div>

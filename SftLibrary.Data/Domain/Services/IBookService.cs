@@ -9,7 +9,7 @@ namespace SftLibrary.Data.Domain.Services
 {
     public interface IBookService
     {
-        Task<IEnumerable<Book>> ListAsync();
+        Task<IEnumerable<Book>> ListAsync(string search);
         Task<BookResponse> FindByIdAsync(int id);
         Task<BookResponse> SaveAsync(Book book);
         Task<BookResponse> UpdateAsync(int id, Book book);

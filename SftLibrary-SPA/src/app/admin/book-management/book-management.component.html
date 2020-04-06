@@ -1,0 +1,22 @@
+<div class="row">
+  <button class="btn btn-block btn-primary mb-2" (click)="addBookModal();"><i class="fa fa-plus mr-2"></i>New Book</button>
+  <table class="table">
+    <tr>
+      <th style="width:  8%">Book #</th>
+      <th style="width: 25%">Title</th>
+      <th style="width: 25%">Author</th>
+      <th style="width: 20%">Publish Year</th>
+      <th style="width: 60%">Action</th>
+    </tr>
+    <tr *ngFor="let book of books">
+      <td>{{book.id}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.year}}</td>
+      <td>
+          <button class="btn btn-primary mr-2" (click)="editBookModal();" ><i class="fa fa-edit"></i></button>
+          <button class="btn btn-primary" (click)="removeBook(book.id);"><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  </table>
+</div>

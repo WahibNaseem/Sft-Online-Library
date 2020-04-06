@@ -1,0 +1,19 @@
+<div class="contaioner">
+  <form novalidate #searchFrom="ngForm" (ngSubmit)="loadBooks();">
+    <div class="formgroup">
+      <input type="text" class="form-control" placeholder="Search through Title" name="searchParam" [(ngModel)]="searchParam" >
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Search</button>
+    <button type="button" class="btn btn-info" (click)="resetFilter();" style="margin-left: 10px;">Reset</button>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div *ngFor="let book of books"  class="col-lg-2 col-md-3 col sm-6">
+      <app-book-card [book] = "book"></app-book-card>
+    </div>
+  </div>
+</div>
+
