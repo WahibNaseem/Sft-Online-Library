@@ -21,6 +21,17 @@ namespace SftLib.Data.Persistance.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role).WithMany(r => r.UserRoles)
+                        .HasForeignKey(ur => ur.RoleId).IsRequired();
+
+                userRole.HasOne(ur => ur.User).WithMany(r => r.UserRoles)
+                        .HasForeignKey(ur => ur.UserId).IsRequired();
+            });
+
             modelBuilder.Entity<Status>().HasKey(x => x.Id);
             modelBuilder.Entity<Status>().Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Status>().Property(x => x.Name).IsRequired().HasMaxLength(20);

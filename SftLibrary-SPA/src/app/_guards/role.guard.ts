@@ -17,11 +17,13 @@ export class RoleGuard implements CanActivate {
         return true;
       } else {
         this.router.navigate(['/home']);
-        this.alertify.error('You are not allowed to access this area');
+        // //to do message
+        // this.alertify.error('You are not allowed to access this area');
         return false;
       }
     }
-    this.alertify.error('You shall not pass');
+    // //to do message
+    // this.alertify.error('You shall not pass');
     this.router.navigate(['/home']);
     return false;
   }

@@ -32,7 +32,7 @@ export class BookModalComponent implements OnInit {
 
   createNewBookForm() {
     this.newBookForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       author: ['', [Validators.required, Validators.maxLength(25)]],
       year: ['', Validators.required]
     });

@@ -46,7 +46,7 @@ namespace SftLibrary.Data.Persistance.Contexts
                 if(result.Succeeded)
                 {
                     var admin = _userManager.FindByNameAsync("Admin").Result;
-                    _userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
+                    _userManager.AddToRoleAsync(admin, "Admin");
                 }
 
             }

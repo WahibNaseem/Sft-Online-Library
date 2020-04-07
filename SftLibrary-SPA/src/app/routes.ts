@@ -8,32 +8,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { BookListComponent } from './home/book-list/book-list.component';
 import { PatronProfileComponent } from './admin/patron-profile/patron-profile.component';
 import { RoleGuard } from './_guards/role.guard';
-
-
-// export const appRoutes: Routes = [
-
-//     { path: 'home', component: BookListComponent },
-//     { path: 'login', component: LoginComponent },
-//     { path: 'register', component: RegisterComponent },
-
-
-
-//     {
-//         path: '',
-//         runGuardsAndResolvers: 'always',
-//         canActivate: [AuthGuard],
-//         children: [
-//             {path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
-//             {
-//                 path: 'patron', component: PatronProfileComponent
-//             },
-//         ]
-//     },
-
-//     { path: '**', redirectTo: 'home', pathMatch: 'full' },
-// ];
-
-
+import { PatronListResolver } from './_resolvers/patron-list.resolver';
 
 
 export const appRoutes: Routes = [

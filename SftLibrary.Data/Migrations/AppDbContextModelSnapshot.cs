@@ -303,19 +303,9 @@ namespace SftLibrary.Data.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RoleId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("RoleId1");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserRoles");
                 });
@@ -367,25 +357,17 @@ namespace SftLibrary.Data.Migrations
 
             modelBuilder.Entity("SftLibrary.Data.Domain.Models.UserRole", b =>
                 {
-                    b.HasOne("SftLibrary.Data.Domain.Models.Role", null)
-                        .WithMany()
+                    b.HasOne("SftLibrary.Data.Domain.Models.Role", "Role")
+                        .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SftLibrary.Data.Domain.Models.Role", null)
+                    b.HasOne("SftLib.Data.Domain.Models.User", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("RoleId1");
-
-                    b.HasOne("SftLib.Data.Domain.Models.User", null)
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SftLib.Data.Domain.Models.User", null)
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

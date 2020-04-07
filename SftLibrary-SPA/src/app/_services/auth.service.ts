@@ -32,7 +32,6 @@ export class AuthService {
   }
 
   register(user: User) {
-    console.log(user);
     return this.http.post(this.baseUrl + 'register', user);
   }
   loggedIn() {

@@ -1,7 +1,7 @@
-<div class="contaioner">
-  <form novalidate #searchFrom="ngForm" (ngSubmit)="loadBooks();">
+<div class="container mt-3">
+  <form novalidate #searchFrom="ngForm" class="form-inline" (ngSubmit)="loadBooks();">
     <div class="formgroup">
-      <input type="text" class="form-control" placeholder="Search through Title" name="searchParam" [(ngModel)]="searchParam" >
+      <input type="text" class="form-control" placeholder="Search through Book Title" name="searchParam" [(ngModel)]="searchParam" >
     </div>
 
     <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Search</button>
@@ -11,7 +11,7 @@
 
 <div class="container mt-5">
   <div class="row">
-    <div *ngFor="let book of books"  class="col-lg-2 col-md-3 col sm-6">
+    <div *ngFor="let book of books"  class="col-lg-3 col-md-4 col sm-6">
       <app-book-card [book] = "book"></app-book-card>
     </div>
   </div>

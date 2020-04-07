@@ -4,6 +4,7 @@ import { PatronService } from 'src/app/_services/patron.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PatronRolesModalComponent } from '../patron-roles-modal/patron-roles-modal.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patron-management',
@@ -14,9 +15,13 @@ export class PatronManagementComponent implements OnInit {
   patrons: User[];
   bsModalRef: BsModalRef;
 
-  constructor(private patronService: PatronService, private alertify: AlertifyService, private modalService: BsModalService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private patronService: PatronService, private route: ActivatedRoute, private alertify: AlertifyService, private modalService: BsModalService) { }
 
   ngOnInit() {
+    // this.route.data.subscribe(data => {
+    //   this.patrons = data.patrons.result;
+    // });
     this.getPartrons();
   }
 
@@ -44,12 +49,12 @@ export class PatronManagementComponent implements OnInit {
       if (rolesToUpdate) {
         console.log(rolesToUpdate);
         this.patronService.updateUserRoles(user, rolesToUpdate).subscribe(() => {
-               user.roles = [...rolesToUpdate.roleNames];
+          user.roles = [...rolesToUpdate.roleNames];
         }, error => {
           this.alertify.error(error);
         });
       }
-    })
+    });
   }
 
 
