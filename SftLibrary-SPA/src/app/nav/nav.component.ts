@@ -11,19 +11,20 @@ import { AlertifyService } from '../_services/alertify.service';
 export class NavComponent implements OnInit {
 
   constructor(public authService: AuthService, private router: Router, private alertify: AlertifyService) { }
+  // roles: string[] = ['Admin', 'Moderator'];
 
   ngOnInit() {
   }
 
   loggedIn() {
     return this.authService.loggedIn();
-   }
+  }
 
-   logout() {
-     localStorage.removeItem('token');
-     localStorage.removeItem('user');
-     this.alertify.success('Logged out successfully');
-     this.router.navigate(['/home']);
-   }
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.alertify.message('Logged out successfully');
+    this.router.navigate(['/home']);
+  }
 
 }

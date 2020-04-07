@@ -19,6 +19,8 @@ import { AlertifyService } from './_services/alertify.service';
 import { PatronService } from './_services/patron.service';
 import { BookService } from './_services/book.service';
 import { AuthGuard } from './_guards/auth.guard';
+import { RoleGuard } from './_guards/role.guard';
+import { HasRoleDirective } from './_directives/hasRole.directive';
 
 
 import { AppComponent } from './app.component';
@@ -34,7 +36,6 @@ import { BookCardComponent } from './home/book-card/book-card.component';
 import { BookModalComponent } from './admin/book-modal/book-modal.component';
 import { PatronRolesModalComponent } from './admin/patron-roles-modal/patron-roles-modal.component';
 import { PatronProfileComponent } from './admin/patron-profile/patron-profile.component';
-
 
 
 
@@ -59,7 +60,8 @@ export function tokenGetter() {
       BookModalComponent,
       PatronRolesModalComponent,
       PatronProfileComponent,
-      
+      HasRoleDirective
+
    ],
    entryComponents: [
       BookModalComponent,
@@ -87,6 +89,7 @@ export function tokenGetter() {
       AuthService,
       AlertifyService,
       AuthGuard,
+      RoleGuard,
       ErrorInterceptorProvider,
       PatronService,
       BookService
