@@ -14,13 +14,18 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PatronService {
-  baseUrl = environment.apiUrl + 'admin/usersWithRoles';
+  baseUrl = environment.apiUrl + 'admin/';
 
   constructor(private client: HttpClient) { }
 
 
   getPatrons(): Observable<User[]> {
-    return this.client.get<User[]>(this.baseUrl, httpOptions);
+    return this.client.get<User[]>(this.baseUrl + 'usersWithRoles', httpOptions);
+  }
+
+  updateUserRoles(user: User, roles: {}) {
+    console.log('Service ->' + roles);
+    return this.client.post(this.baseUrl + 'EditRoles/' + user.userName, roles, httpOptions);
   }
 
 }

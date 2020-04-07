@@ -30,20 +30,57 @@ export class PatronManagementComponent implements OnInit {
   }
 
 
-  editRolesModal() {
+  editRolesModal(user: User) {
     const initialState = {
-      list: [
-        'Open a modal with component',
-        'Pass your data',
-        'Do something else',
-        '...'
-      ],
-      title: 'Edit Patron Roles'
+      user,
+      roles: this.getRolesArray(user),
+      title: 'Edit Roles for'
     };
     this.bsModalRef = this.modalService.show(PatronRolesModalComponent, { initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
+    this.bsModalRef.content.updateSelectedRoles.subscribe((values) => {
+      const rolesToUpdate = {
+        roleNames: [...values.filter((el: any) => el.checked === true).map((el: any) => el.name)]
+      };
+      if (rolesToUpdate) {
+        console.log(rolesToUpdate);
+        this.patronService.updateUserRoles(user, rolesToUpdate).subscribe(() => {
+               user.roles = [...rolesToUpdate.roleNames];
+        }, error => {
+          this.alertify.error(error);
+        });
+      }
+    })
   }
 
 
+
+  private getRolesArray(user) {
+    const roles = [];
+    const userRoles = user.roles;
+    const availableRoles: any[] = [
+      { name: 'Admin', value: 'Admin' },
+      { name: 'Moderator', value: 'Moderator' },
+      { name: 'Member', value: 'Member' },
+    ];
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < availableRoles.length; i++) {
+      let isMatch = false;
+      // tslint:disable-next-line: prefer-for-of
+      for (let j = 0; j < userRoles.length; j++) {
+        if (availableRoles[i].name === userRoles[j]) {
+          isMatch = true,
+            availableRoles[i].checked = true;
+          roles.push(availableRoles[i]);
+          break;
+        }
+      }
+      if (!isMatch) {
+        availableRoles[i].checked = false;
+        roles.push(availableRoles[i]);
+      }
+    }
+    return roles;
+  }
 
 }
