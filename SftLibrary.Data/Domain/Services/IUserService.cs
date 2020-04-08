@@ -1,4 +1,5 @@
 ﻿using SftLib.Data.Domain.Models;
+using SftLibrary.Data.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,6 @@ namespace SftLibrary.Data.Domain.Services
     public interface IUserService
     {
         Task<IEnumerable<User>> ListAsync();
-        Task<User> FindByIdAsync(int id);
+        Task<UserResponse> FindByIdAsync(int id);
     }
 }

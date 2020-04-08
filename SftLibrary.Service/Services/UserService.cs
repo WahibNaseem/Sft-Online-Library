@@ -1,6 +1,7 @@
 ﻿using SftLib.Data.Domain.Models;
 using SftLibrary.Data.Domain.Repositories;
 using SftLibrary.Data.Domain.Services;
+using SftLibrary.Data.Domain.Services.Communication;
 using System.Collections.Generic;
 
 using System.Threading.Tasks;
@@ -15,9 +16,13 @@ namespace SftLibrary.Service.Services
         {
             _repo = repo;
         }
-        public async Task<User> FindByIdAsync(int id)
+        public async Task<UserResponse> FindByIdAsync(int id)
         {
-            return await _repo.FindByIdAsync(id);
+            var existingUser = await _repo.FindByIdAsync(id);
+            if (existingUser == null)
+                return new UserResponse("User Not Found!");
+
+            return new UserResponse(existingUser);
         }
 
         public async Task<IEnumerable<User>> ListAsync()

@@ -37,6 +37,7 @@ import { BookCardComponent } from './home/book-card/book-card.component';
 import { BookModalComponent } from './admin/book-modal/book-modal.component';
 import { PatronRolesModalComponent } from './admin/patron-roles-modal/patron-roles-modal.component';
 import { PatronProfileComponent } from './admin/patron-profile/patron-profile.component';
+import { BookEditModalComponent } from './admin/book-edit-modal/book-edit-modal.component';
 
 
 
@@ -62,13 +63,15 @@ export function tokenGetter() {
       BookCardComponent,
       BookModalComponent,
       PatronRolesModalComponent,
+      BookEditModalComponent,
       PatronProfileComponent,
       HasRoleDirective
 
    ],
    entryComponents: [
       BookModalComponent,
-      PatronRolesModalComponent
+      PatronRolesModalComponent,
+      BookEditModalComponent
    ],
    imports: [
       BrowserModule,

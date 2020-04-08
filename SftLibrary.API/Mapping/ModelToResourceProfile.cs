@@ -16,6 +16,8 @@ namespace SftLibrary.API.Mapping
             CreateMap<Book, BookResource>().ReverseMap();
             CreateMap<Status, StatusResource>().ReverseMap();
             CreateMap<SaveBookResource, Book>().ReverseMap();
+
+            CreateMap<User, UserForCheckoutResource>().ReverseMap();
         }
     }
 }

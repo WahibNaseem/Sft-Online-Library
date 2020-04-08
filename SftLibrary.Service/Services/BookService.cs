@@ -41,7 +41,6 @@ namespace SftLibrary.Service.Services
                 return new BookResponse($"An error occurred when deleting the book:{ex.Message}");
             }
         }
-
         public async Task<BookResponse> FindByIdAsync(int id)
         {
             var existingBook = await _bookRepository.FindByIdAsync(id);
@@ -90,7 +89,8 @@ namespace SftLibrary.Service.Services
             if (existingBook == null)
                 return new BookResponse("Book Not Found!");
 
-            //Update existingBook entitycode here
+            //Update existingBook entitycode here            
+            existingBook.StatusId = book.StatusId;
 
             try
             {

@@ -12,24 +12,26 @@ using System.Threading.Tasks;
 
 namespace SftLibrary.API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Policy = "RequireAdminRole")]
     [ApiController]
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
         private readonly IBookService _bookService;
+        private readonly ICheckoutService _checkoutService;
         private readonly IMapper _mapper;
 
-        public BooksController(IBookService bookService, IMapper mapper)
+        public BooksController(IBookService bookService, ICheckoutService checkoutService, IMapper mapper)
         {
             _bookService = bookService;
+            _checkoutService = checkoutService;
             _mapper = mapper;
         }
-
+        [AllowAnonymous]
         [HttpGet("books")]
-        public async Task<IActionResult> GetBooks([FromQuery]string search )
+        public async Task<IActionResult> GetBooks([FromQuery]string search)
         {
-            
+
             var books = await _bookService.ListAsync(search);
             var resources = _mapper.Map<IEnumerable<BookResource>>(books);
 
@@ -78,6 +80,24 @@ namespace SftLibrary.API.Controllers
 
             var bookResource = _mapper.Map<BookResource>(result.Book);
             return Ok(bookResource);
+        }
+
+        [HttpPost("{id}/checkout/{bookId}")]
+        public async Task<IActionResult> PlaceCheckout(int id, int bookId)
+        {
+            var result = await _checkoutService.CheckOutItem(id, bookId);
+            if (result.Success)
+                return BadRequest(result.Message);
+
+            var resource = _mapper.Map<BookResource>(result.Book);
+            return Ok(resource);
+        }
+
+        [HttpPost("checkin/{bookId}")]
+        public async Task<IActionResult> CheckIn(int bookId)
+        {
+            var books = await _bookService.ListAsync(string.Empty);
+            return Ok("Book has checkout successlfully");
         }
     }
 }

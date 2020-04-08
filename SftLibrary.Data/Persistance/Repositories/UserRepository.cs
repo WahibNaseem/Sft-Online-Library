@@ -16,7 +16,7 @@ namespace SftLibrary.Data.Persistance.Repositories
 
         public async Task<IEnumerable<User>> ListAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(x =>x.CheckOuts).ToListAsync();
         }
         public async Task<User> FindByIdAsync(int id)
         {

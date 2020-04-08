@@ -10,8 +10,8 @@ using SftLib.Data.Persistance.Contexts;
 namespace SftLibrary.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200407132837_initialMigration")]
-    partial class initialMigration
+    [Migration("20200408073851_Checkoutmigration")]
+    partial class Checkoutmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,16 +116,16 @@ namespace SftLibrary.Data.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -268,6 +268,37 @@ namespace SftLibrary.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("SftLibrary.Data.Domain.Models.Checkout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CheckoutBookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CheckoutUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Since")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Until")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("CheckoutUserId");
+
+                    b.ToTable("CheckOuts");
+                });
+
             modelBuilder.Entity("SftLibrary.Data.Domain.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -353,6 +384,19 @@ namespace SftLibrary.Data.Migrations
                     b.HasOne("SftLib.Data.Domain.Models.Status", "Status")
                         .WithMany()
                         .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SftLibrary.Data.Domain.Models.Checkout", b =>
+                {
+                    b.HasOne("SftLib.Data.Domain.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("SftLib.Data.Domain.Models.User", "User")
+                        .WithMany("CheckOuts")
+                        .HasForeignKey("CheckoutUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -15,5 +15,6 @@ namespace SftLib.Data.Domain.Models
         public string Gender { get; set; }
 
         public ICollection<UserRole>  UserRoles { get; set; }
+        public ICollection<Checkout> CheckOuts { get; set; }
     }
 }

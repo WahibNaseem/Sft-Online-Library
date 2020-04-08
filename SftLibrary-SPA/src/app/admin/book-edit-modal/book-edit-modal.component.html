@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="jumbotron">    
+    <form #patronForm="ngForm">
+      <div class="form-group">
+        <label for="UserToFind">User #</label>
+        <input type="number" class="form-control" placeholder="Search By Patron #" required name="value"  [(ngModel)]="this.value">
+        <div class="invalid-feedback">Please enter user id</div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="getPatron()"><i class="fa fa-search mr-2"></i>Find User</button>
+    </form>
+    <label for="" class="mt-4" style="font-style: oblique;" *ngIf="this.found">Patron {{model.userName}} Found!  </label>
+    
+    
+  </div>
+  
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="form-group">
+      <label  class="btn btn-primary mr-1" btnCheckbox tabindex="0" role="button">Check In</label>
+        <!-- <label class="btn btn-primary mr-1" btnCheckbox tabindex="0" role="button">Check Out</label>
+        <label class="btn btn-primary" btnCheckbox tabindex="0" role="button">Available</label> -->
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>Date Loaned</th>
+      <th>Date Returned</th>
+      <th>Patron #</th>
+    </tr>
+    <tr>
+      <td>12-March-2019</td>
+      <td>12-March-2019</td>
+      <td>12-March-2019</td>
+    </tr>
+  </table>
+</div>

@@ -11,6 +11,6 @@ namespace SftLibrary.API.Resources
         public string Author { get; set; }
         public int Year { get; set; }
 
-        public int StatusId { get; set; } = -1;
+        public int StatusId { get; set; } = -2;
     }
 }

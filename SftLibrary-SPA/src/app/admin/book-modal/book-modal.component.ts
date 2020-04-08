@@ -23,11 +23,21 @@ export class BookModalComponent implements OnInit {
 
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder,
-    private bookService: BookService, private alertify: AlertifyService,
-    private router: Router) { }
+              private bookService: BookService, private alertify: AlertifyService,
+              private router: Router, private formBuilder: FormBuilder) { }
+
+  myForm: FormGroup;
 
   ngOnInit() {
     this.createNewBookForm();
+
+
+    // --------------------------
+    this.myForm = this.formBuilder.group({
+      left: [false],
+      middle: [true],
+      right: [false]
+    });
   }
 
   createNewBookForm() {

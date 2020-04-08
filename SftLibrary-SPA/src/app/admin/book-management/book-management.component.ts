@@ -8,6 +8,7 @@ import { BookModalComponent } from '../book-modal/book-modal.component';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BookEditModalComponent } from '../book-edit-modal/book-edit-modal.component';
 
 @Component({
   selector: 'app-book-management',
@@ -51,7 +52,7 @@ export class BookManagementComponent implements OnInit {
       ],
       title: 'Edit Book'
     };
-    this.bsModalRef = this.modalService.show(BookModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(BookEditModalComponent, { initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 

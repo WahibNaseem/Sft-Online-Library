@@ -24,8 +24,12 @@ export class PatronService {
   }
 
   updateUserRoles(user: User, roles: {}) {
-    console.log('Service ->' + roles);
     return this.client.post(this.baseUrl + 'EditRoles/' + user.userName, roles, httpOptions);
+  }
+
+
+  getPatron(id: number) {
+    return this.client.get(environment.apiUrl + 'users/' + id, httpOptions);
   }
 
 }

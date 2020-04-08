@@ -5,29 +5,65 @@
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="newBookForm" id="newBookForm">
+  <div class="jumbotron">
+    <form [formGroup]="newBookForm" id="newBookForm">
 
-     <div class="form-group">
-      <label for="Book Title">Title</label>
-      <input type="text" class="form-control" [ngClass]="{'is-invalid': newBookForm.get('title').errors && newBookForm.get('title').touched}" formControlName="title">
-      <div class="invalid-feedback">Book title required</div>  
-     </div>
- 
-   <div class="form-group">
-     <label for="Book Author">Author</label>
-     <input type="text" class="form-control" [ngClass]="{'is-invalid': newBookForm.get('author').errors && newBookForm.get('author').touched}" formControlName="author">
-     <div class="invalid-feedback" >Author name required</div>
-   </div>
- 
-   <div class="form-group">
-     <label for="Book Year">Year</label>
-     <input type="number" class="form-control" [ngClass]="{'is-invalid': newBookForm.get('year').errors && newBookForm.get('year').touched}" formControlName="year" >
-     <div class="invalid-feedback">Publish year required</div>
-   </div>
- 
-  </form>
+      <div class="form-group">
+        <label for="Book Title">Title</label>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': newBookForm.get('title').errors && newBookForm.get('title').touched}"
+          formControlName="title">
+        <div class="invalid-feedback">Book title required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="Book Author">Author</label>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': newBookForm.get('author').errors && newBookForm.get('author').touched}"
+          formControlName="author">
+        <div class="invalid-feedback">Author name required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="Book Year">Year</label>
+        <input type="number" class="form-control"
+          [ngClass]="{'is-invalid': newBookForm.get('year').errors && newBookForm.get('year').touched}"
+          formControlName="year">
+        <div class="invalid-feedback">Publish year required</div>
+      </div>
+
+    </form>
+  </div>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
   <button type="button" class="btn btn-success" (click)="addNewBook();">Add</button>
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    
+      <div class="btn-group">
+        <label class="btn btn-primary" btnCheckbox tabindex="0" role="button">Check In</label>
+        <label class="btn btn-primary" btnCheckbox tabindex="0" role="button">Check Out</label>
+        <label class="btn btn-primary" btnCheckbox tabindex="0" role="button">Available</label>
+      </div>
+
+  </div>
+</div>
+
+
+<div>
+  <table class="table">
+    <tr>
+      <th>Date Loaned</th>
+      <th>Date Returned</th>
+      <th>Patron #</th>
+    </tr>
+    <tr>
+      <td>12-March-2019</td>
+      <td>12-March-2019</td>
+      <td>12-March-2019</td>
+    </tr>
+  </table>
 </div>

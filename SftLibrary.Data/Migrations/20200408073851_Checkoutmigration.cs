@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SftLibrary.Data.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class Checkoutmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -177,8 +177,8 @@ namespace SftLibrary.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(maxLength: 30, nullable: false),
-                    Author = table.Column<string>(maxLength: 25, nullable: false),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Author = table.Column<string>(maxLength: 30, nullable: false),
                     Year = table.Column<int>(nullable: false),
                     StatusId = table.Column<int>(nullable: false)
                 },
@@ -189,6 +189,35 @@ namespace SftLibrary.Data.Migrations
                         name: "FK_Books_Statuses_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CheckOuts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CheckoutBookId = table.Column<int>(nullable: false),
+                    BookId = table.Column<int>(nullable: true),
+                    CheckoutUserId = table.Column<int>(nullable: false),
+                    Since = table.Column<DateTime>(nullable: false),
+                    Until = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckOuts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CheckOuts_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CheckOuts_AspNetUsers_CheckoutUserId",
+                        column: x => x.CheckoutUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -261,6 +290,16 @@ namespace SftLibrary.Data.Migrations
                 name: "IX_Books_StatusId",
                 table: "Books",
                 column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckOuts_BookId",
+                table: "CheckOuts",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckOuts_CheckoutUserId",
+                table: "CheckOuts",
+                column: "CheckoutUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -281,10 +320,13 @@ namespace SftLibrary.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "CheckOuts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
