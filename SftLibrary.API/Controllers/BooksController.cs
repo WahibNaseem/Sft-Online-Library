@@ -93,7 +93,7 @@ namespace SftLibrary.API.Controllers
             return Ok(resource);
         }
 
-        [HttpPost("checkin/{bookId}")]
+        [HttpPost("checkinItem/{bookId}")]
         public async Task<IActionResult> CheckIn(int bookId)
         {
             var books = await _bookService.ListAsync(string.Empty);

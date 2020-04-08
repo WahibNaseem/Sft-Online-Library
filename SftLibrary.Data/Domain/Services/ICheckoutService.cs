@@ -15,6 +15,7 @@ namespace SftLibrary.Data.Domain.Services
         Task<CheckoutResponse> UpdateAsync(int id, Checkout checkout);
         Task<CheckoutResponse> DeleteAsync(int id);
         Task<BookResponse> CheckOutItem(int id, int bookId);
+        Task<BookResponse> CheckInItem(int bookId);
 
     }
 }

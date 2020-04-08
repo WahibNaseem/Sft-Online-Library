@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SftLib.Data.Domain.Models;
@@ -41,7 +42,8 @@ namespace SftLibrary.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region //Code to Authorize the User through policy rather the action method filter
-            services.AddAuthorization(options => {
+            services.AddAuthorization(options =>
+            {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("RequireMemberRole", policy => policy.RequireRole("Memeber"));
                 options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Admin,Moderator"));
@@ -95,6 +97,8 @@ namespace SftLibrary.API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICheckoutRepository, CheckoutRepository>();
             services.AddScoped<ICheckoutService, CheckoutService>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<Seed>();
 
@@ -118,7 +122,7 @@ namespace SftLibrary.API
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if(error != null)
+                        if (error != null)
                         {
                             context.Response.AddApplicationError(error.Error.Message);
                             await context.Response.WriteAsync(error.Error.Message);
