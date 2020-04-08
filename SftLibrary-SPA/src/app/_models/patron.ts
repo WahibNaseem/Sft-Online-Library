@@ -1,4 +1,4 @@
-export interface User {
+export interface Patron {
     id: number;
     userName: string;
     firstName: string;

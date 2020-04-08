@@ -1,6 +1,6 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { User } from 'src/app/_models/user';
+import { Patron } from 'src/app/_models/patron';
 
 @Component({
   selector: 'app-patron-roles-modal',
@@ -10,7 +10,7 @@ import { User } from 'src/app/_models/user';
 export class PatronRolesModalComponent implements OnInit {
   @Output() updateSelectedRoles = new EventEmitter();
   title: string;
-  user: User;
+  patron: Patron;
   roles: any[];
 
 

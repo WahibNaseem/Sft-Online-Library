@@ -1,32 +1,34 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">{{title}}</h4>
+  <h4 class="modal-title pull-left">{{book.title}} {{book.status.name}}</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <div class="jumbotron">    
+  <div class="jumbotron">
     <form #patronForm="ngForm">
       <div class="form-group">
         <label for="UserToFind">User #</label>
-        <input type="number" class="form-control" placeholder="Search By Patron #" required name="value"  [(ngModel)]="this.value">
+        <input type="number" class="form-control"  (ngModelChange)="clearMessage();"  placeholder="Search By Patron #" required name="value"
+          [(ngModel)]="this.value">
         <div class="invalid-feedback">Please enter user id</div>
       </div>
-      <button type="button" class="btn btn-secondary" (click)="getPatron()"><i class="fa fa-search mr-2"></i>Find User</button>
+      <button type="button" class="btn btn-secondary" [disabled]="!patronForm.valid" (click)="getPatron()"><i class="fa fa-search mr-2"></i>Find
+        User</button>
     </form>
-    <label for="" class="mt-4" style="font-style: oblique;" *ngIf="this.found">Patron {{model.userName}} Found!  </label>
-    
-    
+    <label for="UserFound" class="mt-4" style="font-style: oblique;">{{this.message}}
+    </label>
+
   </div>
-  
+
 </div>
 
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="form-group">
-      <label  class="btn btn-primary mr-1" btnCheckbox tabindex="0" role="button">Check In</label>
-        <!-- <label class="btn btn-primary mr-1" btnCheckbox tabindex="0" role="button">Check Out</label>
-        <label class="btn btn-primary" btnCheckbox tabindex="0" role="button">Available</label> -->
+      <button *ngIf="this.bookStatus" class="btn btn-primary btn-lg btn-block mr-1" (click)="checkInItem(book.id);">Check In</button>
+      <button *ngIf="!this.bookStatus" [disabled]="!patronForm.valid" class="btn btn-primary btn-lg btn-block mr-1" (click)="checkOutItem(this.model.id,book.id);">Check
+        Out</button>
     </div>
   </div>
 </div>

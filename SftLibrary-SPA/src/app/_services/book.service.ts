@@ -18,7 +18,7 @@ export class BookService {
   constructor(private client: HttpClient) { }
 
   getBooks(search: string): Observable<Book[]> {
-    return this.client.get<Book[]>(this.baseUrl + 'books/books?search=' + search , httpOptions);
+    return this.client.get<Book[]>(this.baseUrl + 'books/books?search=' + search, httpOptions);
   }
 
   saveBook(book: Book) {
@@ -29,6 +29,12 @@ export class BookService {
     return this.client.delete(this.baseUrl + 'books/' + id, httpOptions);
   }
 
- 
+  checkOutItem(id: number, bookId: number) {
+    return this.client.post(this.baseUrl + 'books/' + id + '/checkout/' + bookId, httpOptions);
+  }
+
+  checkInItem(bookId: number) {
+    return this.client.post(this.baseUrl + 'books/checkinItem/' + bookId, httpOptions);
+  }
 
 }

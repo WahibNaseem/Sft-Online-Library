@@ -14,7 +14,7 @@
       <td>{{book.author}}</td>
       <td>{{book.year}}</td>
       <td>
-          <button class="btn btn-primary mr-2" (click)="editBookModal();" ><i class="fa fa-edit"></i></button>
+          <button class="btn btn-primary mr-2" (click)="editBookModal(book);" ><i class="fa fa-edit"></i></button>
           <button class="btn btn-primary" (click)="removeBook(book.id);"><i class="fa fa-trash"></i></button>
       </td>
     </tr>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/_models/user';
+import { Patron } from 'src/app/_models/patron';
 import { PatronService } from 'src/app/_services/patron.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./patron-management.component.css']
 })
 export class PatronManagementComponent implements OnInit {
-  patrons: User[];
+  patrons: Patron[];
   bsModalRef: BsModalRef;
 
   // tslint:disable-next-line: max-line-length
@@ -26,7 +26,7 @@ export class PatronManagementComponent implements OnInit {
   }
 
   getPartrons() {
-    this.patronService.getPatrons().subscribe((patrons: User[]) => {
+    this.patronService.getPatrons().subscribe((patrons: Patron[]) => {
       this.patrons = patrons;
     }, error => {
       this.alertify.error(error);
@@ -35,10 +35,10 @@ export class PatronManagementComponent implements OnInit {
   }
 
 
-  editRolesModal(user: User) {
+  editRolesModal(patron: Patron) {
     const initialState = {
-      user,
-      roles: this.getRolesArray(user),
+      patron,
+      roles: this.getRolesArray(patron),
       title: 'Edit Roles for'
     };
     this.bsModalRef = this.modalService.show(PatronRolesModalComponent, { initialState });
@@ -48,8 +48,8 @@ export class PatronManagementComponent implements OnInit {
       };
       if (rolesToUpdate) {
         console.log(rolesToUpdate);
-        this.patronService.updateUserRoles(user, rolesToUpdate).subscribe(() => {
-          user.roles = [...rolesToUpdate.roleNames];
+        this.patronService.updateUserRoles(patron, rolesToUpdate).subscribe(() => {
+          patron.roles = [...rolesToUpdate.roleNames];
         }, error => {
           this.alertify.error(error);
         });
@@ -59,9 +59,9 @@ export class PatronManagementComponent implements OnInit {
 
 
 
-  private getRolesArray(user) {
+  private getRolesArray(patron) {
     const roles = [];
-    const userRoles = user.roles;
+    const patronRoles = patron.roles;
     const availableRoles: any[] = [
       { name: 'Admin', value: 'Admin' },
       { name: 'Moderator', value: 'Moderator' },
@@ -72,8 +72,8 @@ export class PatronManagementComponent implements OnInit {
     for (let i = 0; i < availableRoles.length; i++) {
       let isMatch = false;
       // tslint:disable-next-line: prefer-for-of
-      for (let j = 0; j < userRoles.length; j++) {
-        if (availableRoles[i].name === userRoles[j]) {
+      for (let j = 0; j < patronRoles.length; j++) {
+        if (availableRoles[i].name === patronRoles[j]) {
           isMatch = true,
             availableRoles[i].checked = true;
           roles.push(availableRoles[i]);

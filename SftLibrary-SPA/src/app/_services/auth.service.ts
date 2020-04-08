@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
-import { User } from '../_models/user';
+import { Patron } from '../_models/patron';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-  currentUser: User;
+  currentUser: Patron;
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +31,8 @@ export class AuthService {
 
   }
 
-  register(user: User) {
-    return this.http.post(this.baseUrl + 'register', user);
+  register(patron: Patron) {
+    return this.http.post(this.baseUrl + 'register', patron);
   }
   loggedIn() {
     const token = localStorage.getItem('token');

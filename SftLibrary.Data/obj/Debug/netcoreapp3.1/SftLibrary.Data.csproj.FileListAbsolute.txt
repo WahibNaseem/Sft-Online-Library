@@ -9,3 +9,4 @@ C:\code workcamp\Tutorial\Sft\SftLibrary.Data\obj\Debug\netcoreapp3.1\SftLibrary
 C:\code workcamp\Tutorial\Sft\SftLibrary.Data\obj\Debug\netcoreapp3.1\SftLibrary.Data.dll
 C:\code workcamp\Tutorial\Sft\SftLibrary.Data\obj\Debug\netcoreapp3.1\SftLibrary.Data.pdb
 C:\code workcamp\Tutorial\Sft\SftLibrary.Data\obj\Debug\netcoreapp3.1\SftLibrary.Data.genruntimeconfig.cache
+C:\code workcamp\Tutorial\Sft\SftLibrary.Data\obj\Debug\netcoreapp3.1\SftLibrary.Data.csprojAssemblyReference.cache

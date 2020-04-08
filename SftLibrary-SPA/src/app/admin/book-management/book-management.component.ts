@@ -28,6 +28,7 @@ export class BookManagementComponent implements OnInit {
 
   getBooks() {
     this.bookService.getBooks('').subscribe((books: Book[]) => {
+      console.log(books);
       this.books = books;
     }, error => {
       this.alertify.error(error);
@@ -42,15 +43,10 @@ export class BookManagementComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  editBookModal() {
+  editBookModal(book: Book) {
     const initialState = {
-      list: [
-        'Open a modal with component',
-        'Pass your data',
-        'Do something else',
-        '...'
-      ],
-      title: 'Edit Book'
+       book,
+       title: 'Edit Book'
     };
     this.bsModalRef = this.modalService.show(BookEditModalComponent, { initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
@@ -63,7 +59,7 @@ export class BookManagementComponent implements OnInit {
       this.alertify.error(error);
     }, () => {
       this.router.navigate(['/home']);
-    })
+    });
   }
 
 }

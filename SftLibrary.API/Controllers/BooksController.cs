@@ -86,7 +86,7 @@ namespace SftLibrary.API.Controllers
         public async Task<IActionResult> PlaceCheckout(int id, int bookId)
         {
             var result = await _checkoutService.CheckOutItem(id, bookId);
-            if (result.Success)
+            if (!result.Success)
                 return BadRequest(result.Message);
 
             var resource = _mapper.Map<BookResource>(result.Book);
@@ -96,8 +96,12 @@ namespace SftLibrary.API.Controllers
         [HttpPost("checkinItem/{bookId}")]
         public async Task<IActionResult> CheckIn(int bookId)
         {
-            var books = await _bookService.ListAsync(string.Empty);
-            return Ok("Book has checkout successlfully");
+            var result = await _checkoutService.CheckInItem(bookId);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var resource = _mapper.Map<BookResource>(result.Book);
+            return Ok(resource);
         }
     }
 }

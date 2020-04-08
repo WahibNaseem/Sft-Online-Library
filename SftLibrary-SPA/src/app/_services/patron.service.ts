@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { User } from '../_models/user';
+import { Patron } from '../_models/patron';
 import { Observable } from 'rxjs';
 
 
@@ -19,12 +19,12 @@ export class PatronService {
   constructor(private client: HttpClient) { }
 
 
-  getPatrons(): Observable<User[]> {
-    return this.client.get<User[]>(this.baseUrl + 'usersWithRoles', httpOptions);
+  getPatrons(): Observable<Patron[]> {
+    return this.client.get<Patron[]>(this.baseUrl + 'usersWithRoles', httpOptions);
   }
 
-  updateUserRoles(user: User, roles: {}) {
-    return this.client.post(this.baseUrl + 'EditRoles/' + user.userName, roles, httpOptions);
+  updateUserRoles(patron: Patron, roles: {}) {
+    return this.client.post(this.baseUrl + 'EditRoles/' + patron.userName, roles, httpOptions);
   }
 
 

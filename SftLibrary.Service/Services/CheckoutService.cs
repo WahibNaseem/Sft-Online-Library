@@ -153,11 +153,8 @@ namespace SftLibrary.Service.Services
             var checkout = _checkoutRepository.ListAsync().Result.FirstOrDefault(x => x.CheckoutBookId == bookId);
             if (checkout != null)
                 _checkoutRepository.Remove(checkout);
-            
-
 
             return new BookResponse(existingBook);
-
 
         }
 
