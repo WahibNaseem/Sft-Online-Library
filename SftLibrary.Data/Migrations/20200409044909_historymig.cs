@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SftLibrary.Data.Migrations
 {
-    public partial class Checkoutmigration : Migration
+    public partial class historymig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -194,6 +194,34 @@ namespace SftLibrary.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CheckoutHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    CheckedOut = table.Column<DateTime>(nullable: false),
+                    CheckedIn = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckoutHistories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CheckoutHistories_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CheckoutHistories_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CheckOuts",
                 columns: table => new
                 {
@@ -292,6 +320,16 @@ namespace SftLibrary.Data.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CheckoutHistories_BookId",
+                table: "CheckoutHistories",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckoutHistories_UserId",
+                table: "CheckoutHistories",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CheckOuts_BookId",
                 table: "CheckOuts",
                 column: "BookId");
@@ -318,6 +356,9 @@ namespace SftLibrary.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CheckoutHistories");
 
             migrationBuilder.DropTable(
                 name: "CheckOuts");

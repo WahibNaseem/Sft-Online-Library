@@ -40,10 +40,11 @@
       <th>Date Returned</th>
       <th>Patron #</th>
     </tr>
-    <tr>
-      <td>12-March-2019</td>
-      <td>12-March-2019</td>
-      <td>12-March-2019</td>
+    <tr *ngFor="let history of book.checkoutHistories">
+      <td>{{history.checkedIn}}</td>
+      <td>{{history.checkedOut}}</td>
+      <td>{{history.user.userName}}</td>
+      
     </tr>
   </table>
 </div>

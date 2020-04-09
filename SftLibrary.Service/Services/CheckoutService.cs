@@ -16,14 +16,16 @@ namespace SftLibrary.Service.Services
         private readonly ICheckoutRepository _checkoutRepository;
         private readonly IStatusRepository _statusRepository;
         private readonly IBookService _bookService;
+        private readonly ICheckoutHistoryService _checkoutHistoryService;
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CheckoutService(ICheckoutRepository checkoutRepository, IStatusRepository statusRepository, IBookService bookService, IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public CheckoutService(ICheckoutRepository checkoutRepository, IStatusRepository statusRepository, IBookService bookService, ICheckoutHistoryService checkoutHistoryService, IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _checkoutRepository = checkoutRepository;
             _statusRepository = statusRepository;
             _bookService = bookService;
+            _checkoutHistoryService = checkoutHistoryService;
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
         }
@@ -84,7 +86,6 @@ namespace SftLibrary.Service.Services
             if (existingCheckout == null)
                 return new CheckoutResponse("Checkout Not Found");
 
-            //Update existingCheckout entitycode here
             try
             {
                 _checkoutRepository.Update(existingCheckout);
@@ -114,7 +115,7 @@ namespace SftLibrary.Service.Services
 
             var bookResult = await _bookService.UpdateAsync(bookId, existingBook);
             if (!bookResult.Success)
-                return new BookResponse("Failed to Update status of book to checkout");
+                return new BookResponse($"Failed to Update status of book to checkout :{bookResult.Message}");
 
             var userForCheckOut = _userRepository.ListAsync().Result.FirstOrDefault(x => x.Id == id);
             if (userForCheckOut == null)
@@ -128,11 +129,22 @@ namespace SftLibrary.Service.Services
                 Until = DateTime.Now.AddDays(3)
             };
 
-            var result = await SaveAsync(checkOut);
-            if (result.Success)
-                return new BookResponse(existingBook);
+            var checkoutResult = await SaveAsync(checkOut);
+            if (!checkoutResult.Success)
+                return new BookResponse($"checkoutitem->  :{checkoutResult.Message}");
 
-            return new BookResponse($"checkoutitem->  :{result.Message}");
+            var checkoutHistory = new CheckoutHistory
+            {
+                CheckedOut = DateTime.Now,
+                Book = existingBook,
+                User = userForCheckOut
+            };
+
+            var historyResult = await _checkoutHistoryService.SaveAsync(checkoutHistory);
+            if(!historyResult.Success)
+                return new BookResponse($"Failed to Save history of book to checkout  :{historyResult.Message}"); ;
+
+            return new BookResponse(existingBook);
         }
 
         public async Task<BookResponse> CheckInItem(int bookId)
@@ -153,6 +165,14 @@ namespace SftLibrary.Service.Services
             var checkout = _checkoutRepository.ListAsync().Result.FirstOrDefault(x => x.CheckoutBookId == bookId);
             if (checkout != null)
                 _checkoutRepository.Remove(checkout);
+
+            //close any existing checkout history
+            var history = _checkoutHistoryService.ListAsync().Result.FirstOrDefault(h => h.Book.Id == bookId && h.CheckedIn == null);
+            if(history != null)
+            {
+                history.CheckedIn = DateTime.Now;
+               await _checkoutHistoryService.UpdateAsync(history.Id, history);
+            }
 
             return new BookResponse(existingBook);
 

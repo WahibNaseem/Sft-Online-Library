@@ -33,7 +33,6 @@ export class BookEditModalComponent implements OnInit {
 
   getPatron() {
     this.patronService.getPatron(this.value).subscribe(response => {
-      console.log(response);
       this.model = response;
       this.message = 'Patron ' + this.model.userName + ' Found !';
     }, error => {
@@ -55,7 +54,7 @@ export class BookEditModalComponent implements OnInit {
     }, () => {
       this.bsModalRef.hide();
       this.router.navigate(['/home']);
-      
+
     });
   }
 

@@ -18,10 +18,23 @@ namespace SftLib.Data.Persistance.Contexts
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Checkout> CheckOuts { get; set; }
 
+        public virtual DbSet<CheckoutHistory> CheckoutHistories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            /* Configure CheckOut Histories 
+             */
+
+            modelBuilder.Entity<CheckoutHistory>(checkouthistory =>
+            {
+                checkouthistory.HasKey(x => x.Id);
+                checkouthistory.Property(x => x.Id).ValueGeneratedOnAdd();
+                checkouthistory.Property(x => x.BookId).IsRequired();
+                checkouthistory.Property(x => x.UserId).IsRequired();
+            });
+            
             /*Configure Identity UserRole With Role entity
              * and User entity
              */

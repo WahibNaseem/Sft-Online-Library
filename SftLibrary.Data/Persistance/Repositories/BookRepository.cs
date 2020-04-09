@@ -20,7 +20,7 @@ namespace SftLib.Data.Persistance.Repositories
 
         public async Task<Book> FindByIdAsync(int id)
         {
-            return await _context.Books.FindAsync(id);
+            return await _context.Books.Include(x =>x.Status).FirstOrDefaultAsync(x => x.Id ==id);
         }
 
         public async Task<IEnumerable<Book>> ListAsync()

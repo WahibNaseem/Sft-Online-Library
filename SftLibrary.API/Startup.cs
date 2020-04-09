@@ -93,14 +93,21 @@ namespace SftLibrary.API
 
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookService, BookService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<ICheckoutRepository, CheckoutRepository>();
             services.AddScoped<ICheckoutService, CheckoutService>();
+
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<IStatusService, StatusService>();
+
+            services.AddScoped<ICheckoutHistoryRepository, CheckoutHistoryRepository>();
+            services.AddScoped<ICheckoutHistoryService, CheckoutHistoryService>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<Seed>();
+            services.AddScoped<Seed>();
 
             //Configure AutoMapper in ASP.NET Core 2.0 Above
             services.AddAutoMapper(typeof(Startup));

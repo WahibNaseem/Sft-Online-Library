@@ -8,6 +8,7 @@ using SftLibrary.API.Resources;
 using SftLibrary.Data.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SftLibrary.API.Controllers
@@ -19,12 +20,14 @@ namespace SftLibrary.API.Controllers
     {
         private readonly IBookService _bookService;
         private readonly ICheckoutService _checkoutService;
+        private readonly ICheckoutHistoryService _checkoutHistoryService;
         private readonly IMapper _mapper;
 
-        public BooksController(IBookService bookService, ICheckoutService checkoutService, IMapper mapper)
+        public BooksController(IBookService bookService, ICheckoutService checkoutService, ICheckoutHistoryService checkoutHistoryService, IMapper mapper)
         {
             _bookService = bookService;
             _checkoutService = checkoutService;
+            _checkoutHistoryService = checkoutHistoryService;
             _mapper = mapper;
         }
         [AllowAnonymous]
@@ -33,7 +36,7 @@ namespace SftLibrary.API.Controllers
         {
 
             var books = await _bookService.ListAsync(search);
-            var resources = _mapper.Map<IEnumerable<BookResource>>(books);
+            var resources = _mapper.Map<IEnumerable<BookCheckoutResource>>(books);
 
             return Ok(resources);
         }
@@ -46,7 +49,14 @@ namespace SftLibrary.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var bookResource = _mapper.Map<BookResource>(result.Book);
+
+            var bookResource = _mapper.Map<BookCheckoutResource>(result.Book);
+
+            var history = await _checkoutHistoryService.FindByBookId(id);
+            
+             var historyResource = _mapper.Map<IEnumerable<CheckoutHistoryResource>>(history);
+             bookResource.CheckoutHistories = historyResource;
+            
 
             return Ok(bookResource);
         }
@@ -64,7 +74,7 @@ namespace SftLibrary.API.Controllers
             if (!result.Success)
                 return BadRequest();
 
-            var bookResource = _mapper.Map<BookResource>(result.Book);
+            var bookResource = _mapper.Map<BookCheckoutResource>(result.Book);
 
             return Ok(bookResource);
 
@@ -78,7 +88,7 @@ namespace SftLibrary.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var bookResource = _mapper.Map<BookResource>(result.Book);
+            var bookResource = _mapper.Map<BookCheckoutResource>(result.Book);
             return Ok(bookResource);
         }
 
@@ -89,7 +99,7 @@ namespace SftLibrary.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var resource = _mapper.Map<BookResource>(result.Book);
+            var resource = _mapper.Map<BookCheckoutResource>(result.Book);
             return Ok(resource);
         }
 
@@ -100,7 +110,7 @@ namespace SftLibrary.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var resource = _mapper.Map<BookResource>(result.Book);
+            var resource = _mapper.Map<BookCheckoutResource>(result.Book);
             return Ok(resource);
         }
     }

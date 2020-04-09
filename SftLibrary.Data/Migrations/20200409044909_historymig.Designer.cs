@@ -10,8 +10,8 @@ using SftLib.Data.Persistance.Contexts;
 namespace SftLibrary.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200408073851_Checkoutmigration")]
-    partial class Checkoutmigration
+    [Migration("20200409044909_historymig")]
+    partial class historymig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -299,6 +299,34 @@ namespace SftLibrary.Data.Migrations
                     b.ToTable("CheckOuts");
                 });
 
+            modelBuilder.Entity("SftLibrary.Data.Domain.Models.CheckoutHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CheckedIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckedOut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CheckoutHistories");
+                });
+
             modelBuilder.Entity("SftLibrary.Data.Domain.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -397,6 +425,21 @@ namespace SftLibrary.Data.Migrations
                     b.HasOne("SftLib.Data.Domain.Models.User", "User")
                         .WithMany("CheckOuts")
                         .HasForeignKey("CheckoutUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SftLibrary.Data.Domain.Models.CheckoutHistory", b =>
+                {
+                    b.HasOne("SftLib.Data.Domain.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SftLib.Data.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

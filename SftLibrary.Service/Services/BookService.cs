@@ -21,6 +21,7 @@ namespace SftLibrary.Service.Services
             _bookRepository = bookRepository;
             _unitOfWork = unitOfWork;
         }
+
         public async Task<BookResponse> DeleteAsync(int id)
         {
             var existingBook = await _bookRepository.FindByIdAsync(id);
@@ -41,6 +42,7 @@ namespace SftLibrary.Service.Services
                 return new BookResponse($"An error occurred when deleting the book:{ex.Message}");
             }
         }
+
         public async Task<BookResponse> FindByIdAsync(int id)
         {
             var existingBook = await _bookRepository.FindByIdAsync(id);
@@ -104,5 +106,7 @@ namespace SftLibrary.Service.Services
                 return new BookResponse($"An error occurred when updating the book:{ex.Message}");
             }
         }
+
+
     }
 }
