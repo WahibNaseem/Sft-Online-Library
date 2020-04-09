@@ -59,7 +59,7 @@ namespace SftLib.Data.Persistance.Contexts
                 checkout.HasKey(x => x.Id);
 
                 checkout.HasOne(x => x.User).WithMany(u => u.CheckOuts)
-                        .HasForeignKey(x => x.CheckoutUserId);                
+                        .HasForeignKey(x => x.UserId);                
 
             });
 

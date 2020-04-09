@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SftLibrary.Data.Migrations
 {
-    public partial class historymig : Migration
+    public partial class Changesincheckoutentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -227,9 +227,8 @@ namespace SftLibrary.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CheckoutBookId = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: true),
-                    CheckoutUserId = table.Column<int>(nullable: false),
+                    BookId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     Since = table.Column<DateTime>(nullable: false),
                     Until = table.Column<DateTime>(nullable: false)
                 },
@@ -241,10 +240,10 @@ namespace SftLibrary.Data.Migrations
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CheckOuts_AspNetUsers_CheckoutUserId",
-                        column: x => x.CheckoutUserId,
+                        name: "FK_CheckOuts_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -335,9 +334,9 @@ namespace SftLibrary.Data.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CheckOuts_CheckoutUserId",
+                name: "IX_CheckOuts_UserId",
                 table: "CheckOuts",
-                column: "CheckoutUserId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

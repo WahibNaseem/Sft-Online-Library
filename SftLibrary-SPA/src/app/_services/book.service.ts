@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ObservableInput } from 'rxjs';
 import { Book } from '../_models/book';
 import { environment } from 'src/environments/environment';
+import { CheckoutBookHistory } from '../_models/checkoutBookHistory';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +20,10 @@ export class BookService {
 
   getBooks(search: string): Observable<Book[]> {
     return this.client.get<Book[]>(this.baseUrl + 'books/books?search=' + search, httpOptions);
+  }
+
+  getBook(id: number): Observable<CheckoutBookHistory> {
+    return this.client.get<CheckoutBookHistory>(this.baseUrl + 'books/' + id, httpOptions);
   }
 
   saveBook(book: Book) {

@@ -162,7 +162,7 @@ namespace SftLibrary.Service.Services
 
 
             //Remove any existing checkout on the item
-            var checkout = _checkoutRepository.ListAsync().Result.FirstOrDefault(x => x.CheckoutBookId == bookId);
+            var checkout = _checkoutRepository.ListAsync().Result.FirstOrDefault(x => x.BookId == bookId);
             if (checkout != null)
                 _checkoutRepository.Remove(checkout);
 
@@ -181,7 +181,7 @@ namespace SftLibrary.Service.Services
 
         private bool IsCheckedOut(int id)
         {
-            return ListAsync().Result.Any(x => x.Id == id);
+            return ListAsync().Result.Any(x => x.Book.Id == id);
 
         }
 

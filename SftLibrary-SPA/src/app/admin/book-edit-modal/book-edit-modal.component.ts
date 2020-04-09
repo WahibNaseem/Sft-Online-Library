@@ -6,6 +6,7 @@ import { Book } from 'src/app/_models/book';
 import { Patron } from 'src/app/_models/patron';
 import { BookService } from 'src/app/_services/book.service';
 import { Router } from '@angular/router';
+import { CheckoutBookHistory } from 'src/app/_models/checkoutBookHistory';
 
 @Component({
   selector: 'app-book-edit-modal',
@@ -16,6 +17,8 @@ export class BookEditModalComponent implements OnInit {
   title: string;
   closeBtnName: string;
   book: Book;
+  checkoutBookHistory: CheckoutBookHistory;
+
   // tslint:disable-next-line: max-line-length
   constructor(
     public bsModalRef: BsModalRef,
@@ -29,6 +32,7 @@ export class BookEditModalComponent implements OnInit {
   bookStatus = false;
   ngOnInit() {
     this.getBookStatus();
+    this.getBook(this.book.id);
   }
 
   getPatron() {
@@ -44,6 +48,14 @@ export class BookEditModalComponent implements OnInit {
     if (this.book.status.name === 'Checked Out') {
       this.bookStatus = true;
     }
+  }
+
+  getBook(id: number) {
+    this.bookService.getBook(id).subscribe(response => {
+      this.checkoutBookHistory = response;
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
   checkOutItem(id, bookId) {

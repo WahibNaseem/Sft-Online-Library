@@ -8,9 +8,9 @@ namespace SftLibrary.Data.Domain.Models
     public class Checkout
     {
         public int Id { get; set; }
-        public int CheckoutBookId { get; set; }
+        public int BookId { get; set; }
         public Book Book { get; set; }
-        public int CheckoutUserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
         public DateTime Since { get; set; }
         public DateTime Until { get; set; }

@@ -1,5 +1,4 @@
 import { Status } from './status';
-import { CheckoutHistory } from './checkoutHistory';
 
 export interface Book {
     id: number;
@@ -7,5 +6,4 @@ export interface Book {
     author: string;
     year: number;
     status: Status;
-    checkoutHistories: CheckoutHistory[];
 }

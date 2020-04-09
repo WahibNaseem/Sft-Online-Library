@@ -9,7 +9,7 @@
     <form #patronForm="ngForm">
       <div class="form-group">
         <label for="UserToFind">User #</label>
-        <input type="number" class="form-control"  (ngModelChange)="clearMessage();"  placeholder="Search By Patron #" required name="value"
+        <input type="number" class="form-control" [disabled]="this.book.status.name == 'Checked Out'" (ngModelChange)="clearMessage();"  placeholder="Search By Patron #" required name="value"
           [(ngModel)]="this.value">
         <div class="invalid-feedback">Please enter user id</div>
       </div>
@@ -40,9 +40,9 @@
       <th>Date Returned</th>
       <th>Patron #</th>
     </tr>
-    <tr *ngFor="let history of book.checkoutHistories">
-      <td>{{history.checkedIn}}</td>
-      <td>{{history.checkedOut}}</td>
+    <tr *ngFor="let history of checkoutBookHistory?.checkoutHistories">
+      <td>{{history.checkedOut | date:'mediumDate'}} </td>
+      <td>{{history.checkedIn | date:'mediumDate'}}</td>
       <td>{{history.user.userName}}</td>
       
     </tr>

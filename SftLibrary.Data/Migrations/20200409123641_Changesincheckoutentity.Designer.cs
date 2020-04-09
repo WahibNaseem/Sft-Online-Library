@@ -10,8 +10,8 @@ using SftLib.Data.Persistance.Contexts;
 namespace SftLibrary.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200409044909_historymig")]
-    partial class historymig
+    [Migration("20200409123641_Changesincheckoutentity")]
+    partial class Changesincheckoutentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -275,13 +275,7 @@ namespace SftLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CheckoutBookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CheckoutUserId")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Since")
@@ -290,11 +284,14 @@ namespace SftLibrary.Data.Migrations
                     b.Property<DateTime>("Until")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("CheckoutUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("CheckOuts");
                 });
@@ -420,11 +417,13 @@ namespace SftLibrary.Data.Migrations
                 {
                     b.HasOne("SftLib.Data.Domain.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SftLib.Data.Domain.Models.User", "User")
                         .WithMany("CheckOuts")
-                        .HasForeignKey("CheckoutUserId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
