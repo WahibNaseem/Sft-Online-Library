@@ -21,12 +21,12 @@ namespace SftLibrary.Data.Persistance.Repositories
 
         public async Task<Checkout> FindByIdAsync(int id)
         {
-            return await _context.CheckOuts.FindAsync(id);
+            return await _context.CheckOuts.Include(x =>x.Book).FirstOrDefaultAsync(x =>x.Id==id);
         }
 
         public async Task<IEnumerable<Checkout>> ListAsync()
         {
-            return await _context.CheckOuts.ToListAsync();
+            return await _context.CheckOuts.Include(x =>x.Book).ToListAsync();
         }
 
         public void Remove(Checkout checkout)

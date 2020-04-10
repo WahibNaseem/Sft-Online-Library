@@ -62,7 +62,8 @@ namespace SftLibrary.Service.Services
 
         public async Task<IEnumerable<Checkout>> ListAsync()
         {
-            return await _checkoutRepository.ListAsync();
+            var list = await _checkoutRepository.ListAsync();
+            return list;
         }
 
         public async Task<CheckoutResponse> SaveAsync(Checkout checkout)
@@ -181,8 +182,8 @@ namespace SftLibrary.Service.Services
 
         private bool IsCheckedOut(int id)
         {
-            return ListAsync().Result.Any(x => x.Book.Id == id);
-
+            var result = ListAsync().Result.Any(x => x.Book.Id == id);
+            return result;
         }
 
 
